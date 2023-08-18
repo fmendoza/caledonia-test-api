@@ -67,7 +67,7 @@ const startParseServer = async () => {
   
   const server = new ParseServer({
     databaseURI: process.env.MONGO_URL,
-    cloud: __dirname + (process.env.CLOUD_CODE_MAIN || '/cloud/main.js'),
+    cloud: __dirname + (process.env.CLOUD_CODE_MAIN || '/cloud/main.ts'),
     appId: process.env.PARSE_API_APP_ID,
     masterKey: process.env.PARSE_API_MASTER_KEY,
     serverURL: serverUrl,
