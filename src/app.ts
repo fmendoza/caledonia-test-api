@@ -61,6 +61,7 @@ app.use(
 
 const mountPath = process.env.PARSE_API_MOUNT || '/parse';
 const serverUrl = `${process.env.PARSE_API_SERVER_URL}:${process.env.PORT}${mountPath}`;
+const publicServerUrl = `${process.env.PARSE_API_PUBLIC_SERVER_URL}:${process.env.PORT}${mountPath}`;
 
 const startParseServer = async () => {
   const server = new ParseServer({
@@ -68,7 +69,8 @@ const startParseServer = async () => {
     cloud: path.join(__dirname, (process.env.CLOUD_CODE_MAIN || '/cloud/main.ts')),
     appId: process.env.PARSE_API_APP_ID,
     masterKey: process.env.PARSE_API_MASTER_KEY,
-    serverURL: serverUrl
+    serverURL: serverUrl,
+    publicServerURL: publicServerUrl,
   });
 
   await server.start();
@@ -76,11 +78,7 @@ const startParseServer = async () => {
   app.use(mountPath, server.app);
 };
 
-startParseServer().then(() => {
-  logger.info(`🌏 Parse server started at ${serverUrl}`)
-}).catch(err => {
-  logger.error('Could not start parse server', new Error(err.message))
-});
+startParseServer();
 
 /* const dashboard = new ParseDashboard({
   apps: [

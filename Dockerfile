@@ -27,6 +27,7 @@ ENV PARSE_API_MOUNT=/api
 ENV PARSE_API_APP_ID=appId
 ENV PARSE_API_MASTER_KEY=masterKey
 ENV PARSE_API_SERVER_URL=http://localhost
+ENV PARSE_API_PUBLIC_SERVER_URL=https://caledonia.quanlabs.com
 ENV CLOUD_CODE_MAIN=/cloud/main.js
 
 # Copy node modules and build directory
