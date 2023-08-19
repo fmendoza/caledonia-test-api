@@ -16,7 +16,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Create environment file
-      - shell: bash
+        shell: bash
         env:
           NODE_ENV: ${{ secrets.NODE_ENV }}
           PORT: ${{ secrets.PORT }}
