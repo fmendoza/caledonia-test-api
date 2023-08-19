@@ -7,16 +7,6 @@ on:
     branches:
       - master
 
-env:
-  NODE_ENV: ${{ secrets.NODE_ENV }}
-  PORT: ${{ secrets.PORT }}
-  APP_NAME: ${{ secrets.APP_NAME }}
-  PARSE_DASHBOARD_MOUNT: ${{ secrets.PARSE_DASHBOARD_MOUNT }}
-  PARSE_API_MOUNT: ${{ secrets.PARSE_API_MOUNT }}
-  PARSE_API_APP_ID: ${{ secrets.PARSE_API_APP_ID }}
-  PARSE_API_MASTER_KEY: ${{ secrets.PARSE_API_MASTER_KEY }}
-  PARSE_API_SERVER_URL: ${{ secrets.PARSE_API_SERVER_URL }}
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -25,7 +15,17 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: create env file
+      - name: Create environment file
+      - shell: bash
+        env:
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+          PORT: ${{ secrets.PORT }}
+          APP_NAME: ${{ secrets.APP_NAME }}
+          PARSE_DASHBOARD_MOUNT: ${{ secrets.PARSE_DASHBOARD_MOUNT }}
+          PARSE_API_MOUNT: ${{ secrets.PARSE_API_MOUNT }}
+          PARSE_API_APP_ID: ${{ secrets.PARSE_API_APP_ID }}
+          PARSE_API_MASTER_KEY: ${{ secrets.PARSE_API_MASTER_KEY }}
+          PARSE_API_SERVER_URL: ${{ secrets.PARSE_API_SERVER_URL }}
         run: |
           touch .env
           echo NODE_ENV=$NODE_ENV >> .env
