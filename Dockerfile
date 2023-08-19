@@ -5,6 +5,8 @@ COPY package.json ./
 COPY yarn.lock ./
 COPY scripts/dev.sh ./scripts/dev.sh
 
+COPY .env ./
+
 # Install deps
 RUN yarn install
 
@@ -12,7 +14,6 @@ RUN yarn install
 COPY src ./src
 COPY tsconfig.json ./tsconfig.json
 COPY openapi.yml ./openapi.yml
-COPY .env ./.env
 
 # Build dist
 RUN yarn build
