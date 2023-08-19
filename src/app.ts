@@ -36,13 +36,13 @@ app.use(compression() as any);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(
+/* app.use(
   express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 })
-);
+); */
 
 //app.use(routes);
 
-app.use(
+/* app.use(
   (
     err: ApplicationError,
     req: Request,
@@ -57,7 +57,7 @@ app.use(
       error: err.message
     });
   }
-);
+); */
 
 const mountPath = process.env.PARSE_API_MOUNT || '/parse';
 const serverUrl = `${process.env.PARSE_API_SERVER_URL}:${process.env.PORT}${mountPath}`;
@@ -78,7 +78,7 @@ const startParseServer = async () => {
   app.use(mountPath, server.app);
 };
 
-//startParseServer();
+startParseServer();
 
 /* const dashboard = new ParseDashboard({
   apps: [
