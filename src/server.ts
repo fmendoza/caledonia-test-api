@@ -10,7 +10,7 @@ import util from 'util';
 import app from './app';
 import logger from './logger';
 
-console.log('App name', process.env.CLOUD_CODE_MAIN);
+console.log('PORT', process.env.PORT);
 
 const PORT = process.env.PORT || 3000;
 
