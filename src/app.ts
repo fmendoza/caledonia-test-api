@@ -61,7 +61,7 @@ app.use(
 
 const mountPath = process.env.PARSE_API_MOUNT || '/parse';
 const serverUrl = `${process.env.PARSE_API_SERVER_URL}:${process.env.PORT}${mountPath}`;
-const publicServerUrl = `${process.env.PARSE_API_PUBLIC_SERVER_URL}:${process.env.PORT}${mountPath}`;
+const publicServerUrl = `${process.env.PARSE_API_PUBLIC_SERVER_URL}${mountPath}`;
 
 const startParseServer = async () => {
   const server = new ParseServer({
