@@ -2,13 +2,13 @@ import bodyParser from 'body-parser';
 import compression from 'compression';
 import path from 'path';
 import express, { Request, Response, NextFunction } from 'express';
-import ApplicationError from './errors/application-error';
-import routes from './routes';
-import logger from './logger';
 // @ts-expect-error
 import { ParseServer } from 'parse-server';
 // @ts-expect-error
 import ParseDashboard from 'parse-dashboard';
+import ApplicationError from './errors/application-error';
+import routes from './routes';
+import logger from './logger';
 
 const app = express();
 
@@ -17,13 +17,12 @@ function logResponseTime(req: Request, res: Response, next: NextFunction) {
 
   res.on('finish', () => {
     const elapsedHrTime = process.hrtime(startHrTime);
-    const elapsedTimeInMs =
-      elapsedHrTime[0] * 1000 + elapsedHrTime[1] / 1e6;
+    const elapsedTimeInMs = elapsedHrTime[0] * 1000 + elapsedHrTime[1] / 1e6;
     const message = `${req.method} ${res.statusCode} ${elapsedTimeInMs}ms\t${req.path}`;
     logger.log({
       level: 'debug',
       message,
-      consoleLoggerOptions: { label: 'API' },
+      consoleLoggerOptions: { label: 'API' }
     });
   });
 
@@ -55,7 +54,7 @@ app.use(
     }
 
     return res.status(err.status || 500).json({
-      error: err.message,
+      error: err.message
     });
   }
 );
@@ -64,21 +63,20 @@ const mountPath = process.env.PARSE_API_MOUNT || '/parse';
 const serverUrl = `${process.env.PARSE_API_SERVER_URL}:${process.env.PORT}${mountPath}`;
 
 const startParseServer = async () => {
-  
   const server = new ParseServer({
     databaseURI: process.env.MONGO_URL,
-    cloud: __dirname + (process.env.CLOUD_CODE_MAIN || '/cloud/main.ts'),
+    cloud: path.join(__dirname, (process.env.CLOUD_CODE_MAIN || '/cloud/main.ts')),
     appId: process.env.PARSE_API_APP_ID,
     masterKey: process.env.PARSE_API_MASTER_KEY,
-    serverURL: serverUrl,
+    serverURL: serverUrl
   });
 
   await server.start();
 
   app.use(mountPath, server.app);
-}
+};
 
-startParseServer().catch((err) => logger.error('Could not start parse server', new Error(err.message)));
+startParseServer().catch(err => logger.error('Could not start parse server', new Error(err.message)));
 
 const dashboard = new ParseDashboard({
   apps: [
