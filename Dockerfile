@@ -21,7 +21,7 @@ FROM node:18.16.0-alpine
 
 ENV NODE_ENV=production
 ENV APP_NAME=CaledoniaApi
-ENV PARSE_DASHBOARD_MOUNT=/dashboard
+ENV PARSE_DASHBOARD_MOUNT=/
 ENV PARSE_API_MOUNT=/api
 ENV PARSE_API_APP_ID=appId
 ENV PARSE_API_MASTER_KEY=masterKey
@@ -36,6 +36,4 @@ COPY --from=base /dist /dist
 # Copy static files
 COPY src/public dist/src/public
 
-# Expose port 3000
-EXPOSE 5000
 CMD ["dist/src/server.js"]

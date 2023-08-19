@@ -36,13 +36,13 @@ app.use(compression() as any);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-/* app.use(
+app.use(
   express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 })
-); */
+);
 
 //app.use(routes);
 
-/* app.use(
+app.use(
   (
     err: ApplicationError,
     req: Request,
@@ -57,7 +57,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
       error: err.message
     });
   }
-); */
+);
 
 const mountPath = process.env.PARSE_API_MOUNT || '/parse';
 const serverUrl = `${process.env.PARSE_API_SERVER_URL}:${process.env.PORT}${mountPath}`;
@@ -80,7 +80,7 @@ const startParseServer = async () => {
 
 startParseServer();
 
-/* const dashboard = new ParseDashboard({
+const dashboard = new ParseDashboard({
   apps: [
     {
       serverURL: serverUrl,
@@ -89,9 +89,9 @@ startParseServer();
       appName: process.env.APP_NAME
     }
   ]
-}); */
+});
 
 // mount parse-dashboard
-///app.use(process.env.PARSE_DASHBOARD_MOUNT || '', dashboard);
+app.use(process.env.PARSE_DASHBOARD_MOUNT || '', dashboard);
 
 export default app;
