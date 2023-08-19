@@ -86,9 +86,10 @@ const dashboard = new ParseDashboard({
       serverURL: publicServerUrl,
       appId: process.env.PARSE_API_APP_ID,
       masterKey: process.env.PARSE_API_MASTER_KEY,
-      appName: process.env.APP_NAME
+      appName: process.env.APP_NAME,
     }
-  ]
+  ],
+  trustProxy: 1
 });
 
 // mount parse-dashboard
