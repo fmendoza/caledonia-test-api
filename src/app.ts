@@ -63,6 +63,30 @@ const mountPath = process.env.PARSE_API_MOUNT || '/parse';
 const serverUrl = `${process.env.PARSE_API_SERVER_URL}:${process.env.PORT}${mountPath}`;
 const publicServerUrl = `${process.env.PARSE_API_PUBLIC_SERVER_URL}${mountPath}`;
 
+const startParseDashboard = () => {
+  const dashboard = new ParseDashboard({
+    apps: [
+      {
+        serverURL: publicServerUrl,
+        appId: process.env.PARSE_API_APP_ID,
+        masterKey: process.env.PARSE_API_MASTER_KEY,
+        appName: process.env.APP_NAME,
+      }
+    ],
+    users: [
+      {
+        user: process.env.PARSE_DASHBOARD_USER,
+        pass: process.env.PARSE_DASHBOARD_PASS
+      },
+    ],
+    useEncryptedPasswords: true,
+    trustProxy: 1,
+  });
+  
+  // mount parse-dashboard
+  app.use(process.env.PARSE_DASHBOARD_MOUNT || '', dashboard);
+}
+
 const startParseServer = async () => {
   const server = new ParseServer({
     databaseURI: process.env.MONGO_URL,
@@ -76,30 +100,10 @@ const startParseServer = async () => {
   await server.start();
 
   app.use(mountPath, server.app);
+
+  startParseDashboard();
 };
 
 startParseServer();
-
-const dashboard = new ParseDashboard({
-  apps: [
-    {
-      serverURL: publicServerUrl,
-      appId: process.env.PARSE_API_APP_ID,
-      masterKey: process.env.PARSE_API_MASTER_KEY,
-      appName: process.env.APP_NAME,
-    }
-  ],
-  users: [
-    {
-      user: process.env.PARSE_DASHBOARD_USER,
-      pass: process.env.PARSE_DASHBOARD_PASS
-    },
-  ],
-  useEncryptedPasswords: true,
-  trustProxy: 1,
-});
-
-// mount parse-dashboard
-app.use(process.env.PARSE_DASHBOARD_MOUNT || '', dashboard);
 
 export default app;
