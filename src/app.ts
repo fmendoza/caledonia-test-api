@@ -76,7 +76,11 @@ const startParseServer = async () => {
   app.use(mountPath, server.app);
 };
 
-startParseServer().catch(err => logger.error('Could not start parse server', new Error(err.message)));
+startParseServer().then(() => {
+  logger.info(`🌏 Parse server started at ${serverUrl}`)
+}).catch(err => {
+  logger.error('Could not start parse server', new Error(err.message))
+});
 
 const dashboard = new ParseDashboard({
   apps: [

@@ -21,7 +21,7 @@ FROM node:18.16.0-alpine
 
 ENV NODE_ENV=production
 ENV PORT=3000
-ENV APP_NAME=Caledonia
+ENV APP_NAME=CaledoniaApi
 ENV PARSE_DASHBOARD_MOUNT=/dashboard
 ENV PARSE_API_MOUNT=/api
 ENV PARSE_API_APP_ID=appId

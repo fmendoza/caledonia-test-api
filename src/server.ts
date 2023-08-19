@@ -10,6 +10,8 @@ import util from 'util';
 import app from './app';
 import logger from './logger';
 
+console.log('App name', process.env.APP_NAME);
+
 const PORT = process.env.PORT || 3000;
 
 let debugCallback;
