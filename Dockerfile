@@ -12,6 +12,7 @@ RUN yarn install
 COPY src ./src
 COPY tsconfig.json ./tsconfig.json
 COPY openapi.yml ./openapi.yml
+COPY .env ./.env
 
 # Build dist
 RUN yarn build
