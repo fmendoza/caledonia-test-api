@@ -83,7 +83,7 @@ startParseServer();
 const dashboard = new ParseDashboard({
   apps: [
     {
-      serverURL: serverUrl,
+      serverURL: publicServerUrl,
       appId: process.env.PARSE_API_APP_ID,
       masterKey: process.env.PARSE_API_MASTER_KEY,
       appName: process.env.APP_NAME
