@@ -28,6 +28,8 @@ ENV PARSE_API_MASTER_KEY=masterKey
 ENV PARSE_API_SERVER_URL=http://localhost
 ENV PARSE_API_PUBLIC_SERVER_URL=https://caledonia.quanlabs.com
 ENV CLOUD_CODE_MAIN=/cloud/main.js
+ENV PARSE_DASHBOARD_USER=admin
+ENV PARSE_DASHBOARD_PASS='$2y$12$SAdkXVz82lWGSrnI035y3OiQqt6Kbqyss05/YtJcgxx4BGE7jATyu'
 
 # Copy node modules and build directory
 COPY --from=base ./node_modules ./node_modules

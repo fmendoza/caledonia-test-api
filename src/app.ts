@@ -89,7 +89,14 @@ const dashboard = new ParseDashboard({
       appName: process.env.APP_NAME,
     }
   ],
-  trustProxy: 1
+  users: [
+    {
+      user: process.env.PARSE_DASHBOARD_USER,
+      pass: process.env.PARSE_DASHBOARD_PASS
+    },
+  ],
+  useEncryptedPasswords: true,
+  trustProxy: 1,
 });
 
 // mount parse-dashboard
