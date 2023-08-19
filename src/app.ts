@@ -78,7 +78,7 @@ const startParseServer = async () => {
   app.use(mountPath, server.app);
 };
 
-startParseServer();
+//startParseServer();
 
 /* const dashboard = new ParseDashboard({
   apps: [
