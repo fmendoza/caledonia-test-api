@@ -40,7 +40,7 @@ app.use(
   express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 })
 );
 
-app.use(routes);
+//app.use(routes);
 
 app.use(
   (
@@ -82,7 +82,7 @@ startParseServer().then(() => {
   logger.error('Could not start parse server', new Error(err.message))
 });
 
-const dashboard = new ParseDashboard({
+/* const dashboard = new ParseDashboard({
   apps: [
     {
       serverURL: serverUrl,
@@ -91,9 +91,9 @@ const dashboard = new ParseDashboard({
       appName: process.env.APP_NAME
     }
   ]
-});
+}); */
 
 // mount parse-dashboard
-app.use(process.env.PARSE_DASHBOARD_MOUNT || '', dashboard);
+///app.use(process.env.PARSE_DASHBOARD_MOUNT || '', dashboard);
 
 export default app;
