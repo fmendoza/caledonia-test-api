@@ -29,14 +29,14 @@ jobs:
           PARSE_API_SERVER_URL: ${{ secrets.PARSE_API_SERVER_URL }}
         run: |
           touch .env
-          echo NODE_ENV=$NODE_ENV > .env
-          echo PORT=$PORT > .env
-          echo APP_NAME=$APP_NAME > .env
-          echo PARSE_DASHBOARD_MOUNT=$PARSE_DASHBOARD_MOUNT > .env
-          echo PARSE_API_MOUNT=$PARSE_API_MOUNT > .env
-          echo PARSE_API_APP_ID=$PARSE_API_APP_ID > .env
-          echo PARSE_API_MASTER_KEY=$PARSE_API_MASTER_KEY > .env
-          echo PARSE_API_SERVER_URL=$PARSE_API_SERVER_URL > .env
+          echo NODE_ENV=$NODE_ENV >> .env
+          echo PORT=$PORT >> .env
+          echo APP_NAME=$APP_NAME >> .env
+          echo PARSE_DASHBOARD_MOUNT=$PARSE_DASHBOARD_MOUNT >> .env
+          echo PARSE_API_MOUNT=$PARSE_API_MOUNT >> .env
+          echo PARSE_API_APP_ID=$PARSE_API_APP_ID >> .env
+          echo PARSE_API_MASTER_KEY=$PARSE_API_MASTER_KEY >> .env
+          echo PARSE_API_SERVER_URL=$PARSE_API_SERVER_URL >> .env
           cat .env
       - name: Push to dokku
         uses: dokku/github-action@master
