@@ -95,6 +95,7 @@ const startParseServer = async () => {
     masterKey: process.env.PARSE_API_MASTER_KEY,
     serverURL: serverUrl,
     publicServerURL: publicServerUrl,
+    masterKeyIps: ['0.0.0.0/0'],
   });
 
   await server.start();
