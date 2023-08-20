@@ -36,11 +36,11 @@ app.use(compression() as any);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-/* app.use(
+app.use(
   express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 })
-); */
+);
 
-//app.use(routes);
+app.use(routes);
 
 app.use(
   (
@@ -59,7 +59,7 @@ app.use(
   }
 );
 
-const mountPath = process.env.PARSE_API_MOUNT || '/parse';
+const mountPath = process.env.PARSE_API_MOUNT || '';
 const serverUrl = `${process.env.PARSE_API_SERVER_URL}:${process.env.PORT}${mountPath}`;
 const publicServerUrl = `${process.env.PARSE_API_PUBLIC_SERVER_URL}${mountPath}`;
 
@@ -70,22 +70,22 @@ const startParseDashboard = () => {
         serverURL: publicServerUrl,
         appId: process.env.PARSE_API_APP_ID,
         masterKey: process.env.PARSE_API_MASTER_KEY,
-        appName: process.env.APP_NAME,
+        appName: process.env.APP_NAME
       }
     ],
     users: [
       {
         user: process.env.PARSE_DASHBOARD_USER,
         pass: process.env.PARSE_DASHBOARD_PASS
-      },
+      }
     ],
     useEncryptedPasswords: true,
-    trustProxy: 1,
-  });
-  
+    trustProxy: 1
+  }, { allowInsecureHTTP: process.env.NODE_ENV !== 'development' });
+
   // mount parse-dashboard
   app.use(process.env.PARSE_DASHBOARD_MOUNT || '', dashboard);
-}
+};
 
 const startParseServer = async () => {
   const server = new ParseServer({
@@ -95,7 +95,7 @@ const startParseServer = async () => {
     masterKey: process.env.PARSE_API_MASTER_KEY,
     serverURL: serverUrl,
     publicServerURL: publicServerUrl,
-    masterKeyIps: ['0.0.0.0/0'],
+    masterKeyIps: ['0.0.0.0/0']
   });
 
   await server.start();
