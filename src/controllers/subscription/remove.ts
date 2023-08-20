@@ -5,7 +5,7 @@ import logger from '../../logger';
 
 const remove: RequestHandler = async (req: Request, res) => {
   const { userId } = req.params;
-  let { cameras } = req.body;
+  let cameras = req.body;
   logger.silly(`Subscription to update for customer: ${userId}`);
 
   const query = new Parse.Query(Subscription);
@@ -19,7 +19,7 @@ const remove: RequestHandler = async (req: Request, res) => {
 
   cameras = Array.isArray(cameras) ? cameras : [];
 
-  subscription.cameras = subscription.cameras.filter(id => id !== cameras);
+  subscription.cameras = subscription.cameras.filter(id => !cameras.includes(id));
 
   await subscription.save();
 
