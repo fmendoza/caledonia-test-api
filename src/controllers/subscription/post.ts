@@ -5,7 +5,7 @@ import requestMiddleware from '../../middleware/request-middleware';
 
 const post: RequestHandler = async (req: Request, res) => {
   const { userId } = req.params;
-  let { cameras } = req.body;
+  let cameras = req.body;
   logger.silly(`Subscription to update for customer: ${userId}`);
 
   const query = new Parse.Query(Subscription);
