@@ -24,6 +24,12 @@ const post: RequestHandler = async (req: Request, res) => {
     ...cameras
   ];
 
+  if (subscription.cameras.length > subscription.cameraSlots) {
+    return res.status(409).send({
+      error: 'The user does not have enough slots to add the desired cameras.'
+    });
+  }
+
   await subscription.save();
 
   return res.status(200).send(subscription.toJSON());
