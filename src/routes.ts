@@ -4,7 +4,6 @@ import yaml from 'js-yaml';
 import fs from 'fs';
 import path from 'path';
 
-import * as BookController from './controllers/book';
 import * as SubscriptionController from './controllers/subscription';
 
 const swaggerUiOptions = {
@@ -14,13 +13,6 @@ const swaggerUiOptions = {
 const router = Router();
 
 const SWAGGER_YAML_FILEPATH = path.join(__dirname, '../openapi.yml');
-
-// Book routes
-router.post('/book/add', BookController.add);
-router.get('/book/all', BookController.all);
-router.get('/book/search', BookController.search);
-router.get('/book/id/:bookId', BookController.get);
-router.delete('/book/id/:bookId', BookController.remove);
 
 // Subscription routes
 router.get('/user/:userId', SubscriptionController.get);
