@@ -5,6 +5,7 @@ import fs from 'fs';
 import path from 'path';
 
 import * as SubscriptionController from './controllers/subscription';
+import * as ImageController from './controllers/image';
 
 const swaggerUiOptions = {
   customCss: '.swagger-ui .topbar { display: none }'
@@ -18,6 +19,9 @@ const SWAGGER_YAML_FILEPATH = path.join(__dirname, '../openapi.yml');
 router.get('/user/:userId', SubscriptionController.get);
 router.post('/user/:userId', SubscriptionController.post);
 router.delete('/user/:userId', SubscriptionController.remove);
+
+// Image routes
+router.get('/images/:userId', ImageController.get);
 
 // Dev routes
 if (process.env.NODE_ENV === 'development') {
