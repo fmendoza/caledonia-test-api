@@ -21,6 +21,8 @@ const get: RequestHandler = async (req: Request, res) => {
       ts: image.ts,
       created_at: image.created_at,
       _rid: image.rid,
+      detections: image.detections,
+      video: image.video
     };
 
     return transformedImage;

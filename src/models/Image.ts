@@ -44,6 +44,14 @@ export class Image extends Parse.Object {
   get rid(): string {
     return this.get('rid');
   }
+
+  get detections(): any {
+    return this.get('detections');
+  }
+
+  get video(): any {
+    return this.get('video');
+  }
 };
 
 Parse.Object.registerSubclass('Image', Image);

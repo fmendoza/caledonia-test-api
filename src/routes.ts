@@ -21,7 +21,7 @@ router.post('/user/:userId', SubscriptionController.post);
 router.delete('/user/:userId', SubscriptionController.remove);
 
 // Image routes
-router.get('/images/:userId', ImageController.get);
+router.get('/images', ImageController.get);
 
 // Dev routes
 if (process.env.NODE_ENV === 'development') {
